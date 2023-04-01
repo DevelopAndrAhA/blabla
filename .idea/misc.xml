@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/abutton.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/abutton_focused.xml" value="0.671875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/abutton_normal.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/abutton_pressed.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/bbutton_focused.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.19907407407407407" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.21388888888888888" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/ic_baseline_pressed.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2074074074074074" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/img_actvity_btn.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/img_btn.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/location_icon.xml" value="0.36328125" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/person_ic.xml" value="0.21388888888888888" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/right.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/right_white_pressed.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/rightpressed.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/settings.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/settings_btn.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/settings_pressed.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/drawable/transparent_background.xml" value="0.17407407407407408" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_detail.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_full_image.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_launch.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_main.xml" value="0.340625" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_main2.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_neuro_training.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_result_search.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_search.xml" value="0.67" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/activity_settings.xml" value="0.67" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/camera_fragment.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/camera_view.xml" value="0.67" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/custom_list.xml" value="0.67" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/layout/image_edit_dialog.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/GOZ2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/drawable/img_btn.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/drawable/person_ic.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/drawable/progress_animation.xml" value="0.20185185185185187" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/activity_detail.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/activity_neuro_training.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/activity_result_search.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/custom_list.xml" value="0.3546875" />
+        <entry key="..\:/Users/Altynbek/AndroidStudioProjects/Lesa/app/src/main/res/layout/img_dialog.xml" value="0.3546875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+            allowInsecureProtocol = true
+        }
+        maven {
+            url "http://oss.sonatype.org/content/repositories/snapshots/"
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/'
+            allowInsecureProtocol = true
+        }
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            allowInsecureProtocol = true
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = "mapbox"
+                password = "pk.eyJ1IjoiYWx0dWhhIiwiYSI6ImNsNHFya3dqdzBya3kzZmxudTE0b3o4emgifQ._IFNc_dmOF_mQPrV6QX4ZA"
+            }
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
