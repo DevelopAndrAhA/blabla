@@ -47,9 +47,12 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.widget.TextView;
 import android.widget.Toast;
@@ -97,15 +100,6 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
                         .build();
 
         faceDetector = FaceDetection.getClient(options);
-
-
-        /*Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                faceDatector(null,"eva3");
-            }
-        });
-        t.start();*/
         try {
             detector =
                     TFLiteObjectDetectionAPIModel.create(
@@ -158,7 +152,8 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onClick(View view) {
                  if(isOnline()){
-                     new SearchTask().execute();
+                     SearchTask searchTask = new SearchTask(SearchActivity.this);
+                     searchTask.startSearch();
                 }else{
                     Toast.makeText(SearchActivity.this,array[35],Toast.LENGTH_LONG).show();
                 }
@@ -352,52 +347,62 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
         }
     }
 
-
-    class SearchTask extends AsyncTask<Void,Void,Void>{
+    class SearchTask {
+        private ExecutorService executorService;
         private ProgressDialog dialog;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(SearchActivity.this);
+        private Context context;
+
+        public SearchTask(Context context) {
+            this.context = context;
+            this.executorService = Executors.newSingleThreadExecutor();
+        }
+
+        public void startSearch() {
+            dialog = new ProgressDialog(context);
             dialog.setMessage(array[2]);
             dialog.show();
+
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        OkHttpClient client = new OkHttpClient();
+                        String url = "search?fromDate="+fromDate.getText().toString()+"&toDate="+toDate.getText().toString()+"&crop="+ masToSend+"&lat=0&lng=0&city_id="+city_id+"/";
+                        com.squareup.okhttp.Request request1 = new com.squareup.okhttp.Request.Builder()
+                                .url(conf.getDomen()+ url)
+                                .build();
+                        Call call1 = client.newCall(request1);
+                        final Response response = call1.execute();
+                        String res = response.body().string();
+                        try{
+                            jsonArray = new JSONArray(res);
+                        }catch (Exception e){}
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (dialog.isShowing()) {
+                            dialog.dismiss();
+                        }
+                        if(jsonArray!=null){
+                            Intent intent = new Intent(SearchActivity.this,ResultSearchActivity.class);
+                            intent.putExtra("jsonArray",jsonArray.toString());
+                            startActivity(intent);
+                            jsonArray = null;
+                        }else{
+                            Toast.makeText(SearchActivity.this,array[13],Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
         }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            OkHttpClient client = new OkHttpClient();
-            try {
-                String url = "search?fromDate="+fromDate.getText().toString()+"&toDate="+toDate.getText().toString()+"&crop="+ masToSend+"&lat=0&lng=0&city_id="+city_id+"/";
-                com.squareup.okhttp.Request request1 = new com.squareup.okhttp.Request.Builder()
-                        .url(conf.getDomen()+ url)
-                        .build();
-                Call call1 = client.newCall(request1);
-                final Response response = call1.execute();
-                String res = response.body().string();
-                try{
-                    jsonArray = new JSONArray(res);
-                }catch (Exception e){}
-            }catch (Exception e){}
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void unused) {
-            super.onPostExecute(unused);
+        public void cancelSearch() {
+            executorService.shutdownNow();
             if (dialog.isShowing()) {
                 dialog.dismiss();
             }
-            if(jsonArray!=null){
-                Intent intent = new Intent(SearchActivity.this,ResultSearchActivity.class);
-                intent.putExtra("jsonArray",jsonArray.toString());
-                startActivity(intent);
-                jsonArray = null;
-            }else{
-                Toast.makeText(SearchActivity.this,array[13],Toast.LENGTH_SHORT).show();
-            }
         }
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
