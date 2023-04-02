@@ -3,6 +3,7 @@ package com.lesa_humdet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -16,6 +17,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PixelFormat;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -30,7 +32,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -254,9 +258,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
 
 
 
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -363,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     protected void onStart() {
         super.onStart();
+        Log.e("onStart","onStart");
         if (m_mapView != null) {
             m_mapView.onStart();
             cityChanged(m_map);
@@ -372,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     public void onStop() {
         super.onStop();
+        Log.e("onStop","onStop");
         if (m_mapView != null) {
             m_mapView.onStop();
         }
@@ -380,6 +384,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e("onResume","onResume");
         if (m_mapView != null) {
             m_mapView.onResume();
         }
@@ -388,6 +393,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     protected void onPause() {
         super.onPause();
+        Log.e("onPause","onPause");
         if (m_mapView != null) {
             m_mapView.onPause();
         }
@@ -396,6 +402,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.e("onSaveInstanceState","onSaveInstanceState");
         if (m_mapView != null) {
             m_mapView.onSaveInstanceState(outState);
         }
@@ -404,6 +411,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+        Log.e("onLowMemory","onLowMemory");
         if (m_mapView != null) {
             m_mapView.onLowMemory();
         }
@@ -412,6 +420,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.e("onDestroy","onDestroy");
         if (m_mapView != null) {
             m_mapView.onDestroy();
         }
