@@ -11,7 +11,9 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -83,7 +85,7 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
         boolean main = getIntent().getBooleanExtra("main",false);
         if(main){
             textView.setText(array[22]);//metka 2
-            getSupportActionBar().setTitle("");
+            getSupportActionBar().setTitle(array[39]);
         }else{
             textView.setText(array[16]);
             textView3.setText(array[34]);
@@ -110,53 +112,76 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
             }
         });
 
+        ImageButton img_activity = findViewById(R.id.img_activity);
+        img_activity.setOnClickListener(e -> {
+            if(isOnline()){
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent );
+            }else{
+                Toast.makeText(ResultSearchActivity.this,array[35],Toast.LENGTH_LONG).show();
+            }
+        });
         ImageButton settings_btn = findViewById(R.id.settings_btn);
         settings_btn.setOnClickListener(e -> {
             Intent intent2 = new Intent(this,SettingsActivity.class);
             startActivity(intent2);
         });
-
-
-        try{
-            jsonArray = new JSONArray(getIntent().getStringExtra("jsonArray"));
-        }catch (Exception e){}
-
         listView = findViewById(R.id.lisView);
         list = new ArrayList<String[]>();
         jsonObjects = new ArrayList<JSONObject[]>();
 
-        for(int i=0;i<jsonArray.length();i++){
-            String[] urlMas3 = new String[3];
-            JSONObject [] jsonObject = new JSONObject[3];
-            try{
-               urlMas3[0] = jsonArray.getJSONObject(i).getString("photoName");
-                jsonObject[0] = jsonArray.getJSONObject(i);
-            }catch (Exception e){}
-            try{
-                urlMas3[1] = jsonArray.getJSONObject(i+1).getString("photoName");
-                jsonObject[1] = jsonArray.getJSONObject(i+1);
-                i = i+1;
-            }catch (Exception e){}
-            try{
-                urlMas3[2] = jsonArray.getJSONObject(i+1).getString("photoName");
-                jsonObject[2] = jsonArray.getJSONObject(i+1);
-                i = i+1;
-            }catch (Exception e){}
-            list.add(urlMas3);
-            jsonObjects.add(jsonObject);
-        }
-        if(list==null || list.size()==0) textView.setVisibility(View.VISIBLE);
-        CustomArrayAdapter adapter = new CustomArrayAdapter(ResultSearchActivity.this, list,jsonObjects,jsonArray.toString());
-        runOnUiThread(new Runnable() {
-            public void run() {
-                adapter.alertDialogBuilder();
-            }
-        });
-        listView.setAdapter(adapter);
-        listView.setClickable(false);
+        try{
+            jsonArray = new JSONArray(getIntent().getStringExtra("jsonArray"));
+            for(int i=0;i<jsonArray.length();i++){
+                String[] urlMas3 = new String[3];
+                JSONObject [] jsonObject = new JSONObject[3];
+                try{
+                    urlMas3[0] = jsonArray.getJSONObject(i).getString("photoName");
+                    jsonObject[0] = jsonArray.getJSONObject(i);
+                }catch (Exception e){}
+                try{
+                    urlMas3[1] = jsonArray.getJSONObject(i+1).getString("photoName");
+                    jsonObject[1] = jsonArray.getJSONObject(i+1);
+                    i = i+1;
+                }catch (Exception e){}
+                try{
+                    urlMas3[2] = jsonArray.getJSONObject(i+1).getString("photoName");
+                    jsonObject[2] = jsonArray.getJSONObject(i+1);
+                    i = i+1;
+                }catch (Exception e){}
+                list.add(urlMas3);
+                jsonObjects.add(jsonObject);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+                if(list==null || list.size()==0) textView.setVisibility(View.VISIBLE);
+                CustomArrayAdapter adapter = new CustomArrayAdapter(ResultSearchActivity.this, list,jsonObjects,jsonArray.toString());
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        adapter.alertDialogBuilder();
+                    }
+                });
+                listView.setAdapter(adapter);
+                listView.setClickable(false);
+            }
+        }catch (Exception e){}
+
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(Settings.canDrawOverlays(this)){
+                Intent intentService = new Intent(ResultSearchActivity.this,MyService.class);
+                startService(intentService);
+            }else{
+                Toast.makeText(ResultSearchActivity.this,array[30],Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+        if(isOnline()&&jsonArray==null){
+            getDataWithoutMap();
+        }else if(!isOnline()){
+            Toast.makeText(ResultSearchActivity.this,array[35],Toast.LENGTH_LONG).show();
+        }
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -270,4 +295,8 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
     }
+
+
+
+
 }

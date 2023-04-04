@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(!Settings.canDrawOverlays(this)){
-                // ask for setting
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION);
@@ -129,8 +128,7 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
                 });
 
                 Icon paellaIcon = IconFactory.getInstance(MainActivity.this).defaultMarker();
-                //Icon paellaIcon = IconFactory.getInstance(MainActivity.this).fromBitmap(bmp)
-                Marker marker =  mapboxMap.addMarker(new MarkerOptions().setPosition(new LatLng(lat, lng)).setTitle("").setIcon(paellaIcon));
+                mapboxMap.addMarker(new MarkerOptions().setPosition(new LatLng(lat, lng)).setTitle("").setIcon(paellaIcon));
                 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
@@ -192,19 +190,11 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
         });
 
         ImageButton settings_btn = findViewById(R.id.settings_btn);
-        ImageButton img_activity = findViewById(R.id.img_activity);
         settings_btn.setOnClickListener(e -> {
             Intent intent2 = new Intent(this,SettingsActivity.class);
             startActivity(intent2);
         });
 
-        img_activity.setOnClickListener(e -> {
-            if(isOnline()){
-                getDataWithoutMap();
-            }else{
-                Toast.makeText(MainActivity.this,array[35],Toast.LENGTH_LONG).show();
-            }
-        });
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 &&
@@ -221,40 +211,17 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
         if(providerStatus(locationManager)){
             onLocationChanged(networkLoc);
         }
-
-
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
         if(isOnline()){
             getData();
             new StatusOfBanner().execute();
         }else{
             Toast.makeText(MainActivity.this,array[35],Toast.LENGTH_LONG).show();
         }
-
-
-
-
-
-
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(Settings.canDrawOverlays(this)){
-                Intent intentService = new Intent(MainActivity.this,MyService.class);
-                startService(intentService);
-            }else{
-                Toast.makeText(MainActivity.this,array[30],Toast.LENGTH_LONG).show();
-            }
-        }
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        /*MyCameraX myCameraX = new MyCameraX(getApplicationContext(),MainActivity.this);
-        myCameraX.start();*/
-        /*CameraClass cameraClass = new CameraClass(getApplicationContext());
-        cameraClass.start();*/
-
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

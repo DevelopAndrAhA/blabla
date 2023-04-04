@@ -77,13 +77,6 @@
                 android:background="@color/purple_500"
                 app:srcCompat="@drawable/settings_btn" />
 
-            <ImageButton
-                android:id="@+id/img_activity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/purple_500"
-                app:srcCompat="@drawable/img_actvity_btn" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,8 @@ public class LaunchActivity extends AppCompatActivity {
         ImageButton button = findViewById(R.id.imageButton2);
 
         button.setOnClickListener(e -> {
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this,ResultSearchActivity.class);
+            intent.putExtra("main",true);
             startActivity(intent);
         });
 

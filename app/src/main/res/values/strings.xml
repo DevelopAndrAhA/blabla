@@ -47,7 +47,7 @@
         <item>No photos yet</item>
         <item>Latest photos</item>
         <item>Language</item>
-        <item>Ping (location of a person at the moment)</item>
+        <item>Mobile phone tracking (location of a person at the moment)</item>
         <item>Under testing</item>
         <item>Select address</item>
         <item>Change address</item>
@@ -61,6 +61,7 @@
         <item>Ok</item>
         <item>From date</item>
         <item>To date</item>
+        <item>Home</item>
     </string-array>
 
     <string-array name="app_lang_ru">
@@ -89,7 +90,7 @@
         <item>Пока нет фотографий</item>
         <item>Последние фото</item>
         <item>Язык</item>
-        <item>Пинг(местонахождение человека в данный момент)</item>
+        <item>Трассировка мобильного телефона(текущее местоположение человека)</item>
         <item>В стадии тестирования</item>
         <item>Выбрать адрес</item>
         <item>Сменить адрес</item>
@@ -103,6 +104,7 @@
         <item>Ok</item>
         <item>Начальная дата</item>
         <item>Конечная дата</item>
+        <item>Главная</item>
     </string-array>
     <string-array name="app_lang_ar">
         <item>يخفي</item>
@@ -130,7 +132,7 @@
         <item>ليست هناك صور بعد</item>
         <item>أحدث الصور</item>
         <item>لغة</item>
-        <item>بينغ (موقع الشخص في الوقت الحالي)</item>
+        <item>تتبع الهاتف المحمول (موقع الشخص الحالي)</item>
         <item>تحت الاختبار</item>
         <item>حدد العنوان</item>
         <item>تغيير العنوان</item>
@@ -144,6 +146,7 @@
         <item>نعم</item>
         <item>من التاريخ</item>
         <item>ان يذهب في موعد</item>
+        <item>بيت</item>
     </string-array>
 
 

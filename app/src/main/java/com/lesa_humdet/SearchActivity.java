@@ -41,7 +41,9 @@ import com.lesa_humdet.db.Region;
 import com.lesa_humdet.tflite.SimilarityClassifier;
 import com.lesa_humdet.tflite.TFLiteObjectDetectionAPIModel;
 import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
@@ -231,6 +233,9 @@ public class SearchActivity extends AppCompatActivity implements DatePickerDialo
 
 
     }
+
+
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
