@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -37,6 +43,8 @@ import java.util.List;
 
 public class ResultSearchActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    int REQUEST_OVERLAY_PERMISSION=1000;
+    MyPermissions per = new MyPermissions(ResultSearchActivity.this,ResultSearchActivity.this);
     OkHttpClient client = new OkHttpClient();
     private String [] array;
     Conf conf = new Conf();
@@ -129,7 +137,7 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
         listView = findViewById(R.id.lisView);
         list = new ArrayList<String[]>();
         jsonObjects = new ArrayList<JSONObject[]>();
-
+        per.getMyApplicationPermissions();
         try{
             jsonArray = new JSONArray(getIntent().getStringExtra("jsonArray"));
             for(int i=0;i<jsonArray.length();i++){
@@ -165,7 +173,13 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
         }catch (Exception e){}
 
 
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(!Settings.canDrawOverlays(this)){
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION);
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if(Settings.canDrawOverlays(this)){
@@ -176,9 +190,16 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
             }
         }
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
 
         if(isOnline()&&jsonArray==null){
             getDataWithoutMap();
+            new StatusOfBanner().execute();
         }else if(!isOnline()){
             Toast.makeText(ResultSearchActivity.this,array[35],Toast.LENGTH_LONG).show();
         }
@@ -297,6 +318,40 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
     }
 
 
+    class StatusOfBanner extends AsyncTask<Void,Void,Void>{
+        String statusCode = "N";
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String url = "ads_sts/";
+            com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
+                    .url(conf.getDomen()+ url)
+                    .build();
+            Call call = client.newCall(request);
+            try{
+                Response response = call.execute();
+                if(response.code()==200){
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+                    if(!jsonObject.getString("status").equals("N")){
+                        statusCode = jsonObject.getString("status");
+                    }
+                }
+            }catch (Exception e){}
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            AdView mAdView = findViewById(R.id.adView);
+            if(!statusCode.equals("N")){
+                AdRequest adRequest = new AdRequest.Builder().build();
+                mAdView.loadAd(adRequest);
+            }else{
+                mAdView.setVisibility(View.GONE);
+            }
+
+        }
+    }
 
 
 }

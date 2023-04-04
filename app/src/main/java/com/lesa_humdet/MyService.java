@@ -563,7 +563,6 @@ public class MyService extends  Service implements LifecycleOwner {
                 canvas.drawRect(faceBB, paint);
                 String label = "";
                 float confidence = -1f;
-                Integer color = Color.BLUE;
                 Object extra = null;
                 Bitmap crop = null;
                 try{
@@ -583,15 +582,10 @@ public class MyService extends  Service implements LifecycleOwner {
                         if (conf < 1.0f) {
                             confidence = conf;
                             label = result.getTitle();
-                            if (result.getId().equals("0")) {
-                                color = Color.TRANSPARENT;
-                            }else {
-                                color = Color.TRANSPARENT;
-                            }
                         }
                     }
                     final SimilarityClassifier.Recognition result = new SimilarityClassifier.Recognition(startTime+"", label, confidence, boundingBox,"");
-                    result.setColor(color);
+                    //result.setColor(color);
                     result.setExtra(extra);
                     result.setCrop(crop);
                     result.setLocation(boundingBox);
@@ -712,7 +706,6 @@ public class MyService extends  Service implements LifecycleOwner {
                                 }
                             }
                             saveNewFace.setCrop(masToSend.toString());
-                            //takePicture(currTimestamp);
                             new TakePictureTask().execute();
                         });
                         executor.shutdown();

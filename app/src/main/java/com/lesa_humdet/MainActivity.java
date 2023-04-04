@@ -147,8 +147,6 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
                     cityChanged(mapboxMap);
                 }
 
-
-
             }
         });
 
@@ -484,46 +482,6 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
             }
         });
         builderSingle.show();
-    }
-
-
-    public void getDataWithoutMap(){
-        JSONArray[] jsonArray = new JSONArray[1];
-        ProgressDialog  dialog = new ProgressDialog(MainActivity.this);
-        dialog.setMessage(array[1]);
-        dialog.setCancelable(false);
-        dialog.show();
-
-            String url = "getFirstData4imgs/";
-            com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
-                    .url(conf.getDomen()+ url)
-                    .build();
-            Call call = client.newCall(request);
-            call.enqueue(new Callback() {
-                @Override
-                public void onFailure(Request request, IOException e) {}
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    // Обработка результата
-                    String res = response.body().string();
-                    try{
-                        jsonArray[0] = new JSONArray(res);
-                        if (dialog.isShowing()) {
-                            dialog.dismiss();
-                        }
-                        if(jsonArray[0] != null){
-                            Intent intent = new Intent(MainActivity.this,ResultSearchActivity.class);
-                            intent.putExtra("jsonArray", jsonArray[0].toString());
-                            intent.putExtra("main",true);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(MainActivity.this,array[22],Toast.LENGTH_SHORT).show();
-                        }
-                    }catch (Exception e){}
-                }
-        });
-
-
     }
 
     public void getData(){
