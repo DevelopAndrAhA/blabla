@@ -3,7 +3,6 @@ package com.lesa_humdet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -17,7 +16,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PixelFormat;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -30,11 +28,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -255,8 +250,10 @@ public class MainActivity extends AppCompatActivity implements  MapboxMap.OnMark
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
-
+        /*MyCameraX myCameraX = new MyCameraX(getApplicationContext(),MainActivity.this);
+        myCameraX.start();*/
+        /*CameraClass cameraClass = new CameraClass(getApplicationContext());
+        cameraClass.start();*/
 
     }
     @Override
