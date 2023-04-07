@@ -16,6 +16,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,6 +37,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -227,8 +230,31 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
-    public void getDataWithoutMap(){
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_bookmarks) {
+            Intent intent = new Intent(getApplicationContext(),BookmarksActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void  getDataWithoutMap(){
+
+        ProgressDialog dialog = new ProgressDialog(ResultSearchActivity.this);
+        dialog.setMessage(array[1]);
+        dialog.show();
+
         JSONArray[] jsonArray = new JSONArray[1];
         String url = "getFirstData4imgs/";
         com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
@@ -279,6 +305,7 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
                                 listView.setVisibility(View.VISIBLE);
                                 textView.setVisibility(View.GONE);
                                 textView3.setVisibility(View.GONE);
+                                dialog.dismiss();
                             }
                         });
                         swipeRefreshLayout.postDelayed(new Runnable() {

@@ -96,6 +96,9 @@ public class SettingsActivity extends AppCompatActivity {
             builder.setPositiveButton(array[36], new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intentService = new Intent(SettingsActivity.this,MyService.class);
+                    stopService(intentService);
+
                     Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     finish();
@@ -174,7 +177,6 @@ public class SettingsActivity extends AppCompatActivity {
                                 cityName.setText(arrayCity.getItem(c));
                                 cityName.setText(arrayCity.getItem(c));
                                 city_id = cities.get(c).getId();
-                                Log.e("city_id :","ID :"+city_id);
                             }
                         });
                         builderInnerCity.show();

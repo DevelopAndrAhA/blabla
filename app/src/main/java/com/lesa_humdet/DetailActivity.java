@@ -1,12 +1,16 @@
 package com.lesa_humdet;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +40,7 @@ import org.json.JSONObject;
 public class DetailActivity extends AppCompatActivity {
 
     private MyPermissions per = new MyPermissions(DetailActivity.this,DetailActivity.this);
+    SharedPreferences.Editor editor;
     private SharedPreferences mSettings;
     private MapView m_mapView;
     private String [] array;
@@ -54,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoiYWx0dWhhIiwiYSI6ImNsNHFya3dqdzBya3kzZmxudTE0b3o4emgifQ._IFNc_dmOF_mQPrV6QX4ZA");
         mSettings = getSharedPreferences(conf.getShared_pref_name(), Context.MODE_PRIVATE);
+        editor = mSettings.edit();
         setContentView(R.layout.activity_detail);
         personImg = findViewById(R.id.personImg);
         //percent = findViewById(R.id.percent);
@@ -157,8 +163,60 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-
     }
+    JSONArray bookmarks = null;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_details, menu);
+
+        MenuItem item = menu.findItem(R.id.action_bookmarks);
+        item.setTitle(array[40]);
+        try {
+            bookmarks = new JSONArray(mSettings.getString("bookmarks","[]"));
+            Log.e("TAG", bookmarks.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            for (int i = 0; i < bookmarks.length(); i++) {
+                JSONObject tmpJsonObj = bookmarks.getJSONObject(i);
+                if (tmpJsonObj.getString("photoName").equals(jsonObject.getString("photoName"))) {
+                    item.setIcon(R.drawable.ic_baseline_bookmark_added_24);
+                    Log.e("TAG", "detected");
+                    break;
+                }
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean result = true;
+        if (item.getItemId() == R.id.action_bookmarks) {
+            try {
+                for (int i = 0; i < bookmarks.length(); i++) {
+                    JSONObject tmpJsonObj = bookmarks.getJSONObject(i);
+                    if (tmpJsonObj.getString("photoName").equals(jsonObject.getString("photoName"))) {
+                        result = false;
+                        break;
+                    }
+                }
+            }catch (Exception e){e.printStackTrace();}
+
+            if(result){
+                item.setIcon(R.drawable.ic_baseline_bookmark_added_24);
+                bookmarks.put(jsonObject);
+                editor.putString("bookmarks",bookmarks.toString());
+                editor.apply();
+            }
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

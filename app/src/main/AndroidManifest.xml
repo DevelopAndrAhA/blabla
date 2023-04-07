@@ -50,6 +50,10 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookmarksActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
