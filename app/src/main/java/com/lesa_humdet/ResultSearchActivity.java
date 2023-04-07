@@ -244,6 +244,10 @@ public class ResultSearchActivity extends AppCompatActivity implements SwipeRefr
             Intent intent = new Intent(getApplicationContext(),BookmarksActivity.class);
             startActivity(intent);
             return true;
+        }else if(item.getItemId() == R.id.history) {
+            Intent intent = new Intent(getApplicationContext(),HistoryActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

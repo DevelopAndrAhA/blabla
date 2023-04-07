@@ -7,4 +7,10 @@
         android:icon="@drawable/mybookmarks"
         android:orderInCategory="100"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/history"
+        android:title="*"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
 </menu>

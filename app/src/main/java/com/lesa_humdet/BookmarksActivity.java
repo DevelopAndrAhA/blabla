@@ -2,12 +2,15 @@ package com.lesa_humdet;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -98,14 +101,23 @@ public class BookmarksActivity extends AppCompatActivity {
 
 
 
-        new StatusOfBanner().execute();
-
+        if(isOnline()){
+            new StatusOfBanner().execute();
+        }else if(!isOnline()){
+            Toast.makeText(BookmarksActivity.this,array[35],Toast.LENGTH_LONG).show();
+        }
 
     }
 
 
 
 
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
 
     class StatusOfBanner extends AsyncTask<Void,Void,Void> {

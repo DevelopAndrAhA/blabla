@@ -36,7 +36,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".DetailActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ResultSearchActivity"
@@ -48,11 +48,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".BookmarksActivity"
-            android:exported="true"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <meta-data
